@@ -44,8 +44,13 @@ function Character1() {
     fetchImage();
   };
 
+  const handleNext = () => {
+    navigate('/character2', { state: { aiName, imageUrl } }); // pass data to Character2
+  };
+
   const handleSave = () => {
-    navigate('/character2', { state: { aiName, imageUrl } }); // data to Character2
+    // save logic
+    //console.log('Save functionality goes here');
   };
 
   useEffect(() => {
@@ -94,8 +99,9 @@ function Character1() {
       <canvas ref={canvasRef} style={{ border: '1px solid #ccc', maxWidth: '100%', maxHeight: '300px' }} />
       {imageUrl && (
         <div style={{ marginTop: '16px' }}>
+          <button onClick={handleRegenerate} style={{ padding: '8px 16px', marginRight: '8px' }}>Regenerate</button>
           <button onClick={handleSave} style={{ padding: '8px 16px', marginRight: '8px' }}>Save</button>
-          <button onClick={handleRegenerate} style={{ padding: '8px 16px' }}>Regenerate</button>
+          <button onClick={handleNext} style={{ padding: '8px 16px' }}>Next</button>
         </div>
       )}
     </div>
