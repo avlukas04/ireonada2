@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import BottomIcons from '../../components/overall/BottomIcons';
+import TopBar from '../../components/overall/TopBar';
 
 function Calling1() {
   //sets the blank input text and conversation
@@ -75,6 +77,7 @@ function Calling1() {
 
   return (
     <div>
+      <TopBar/>
       <div>
         {!conversationStarted && (
           <button onClick={handleStartConversation}>Start Conversation</button>
@@ -102,6 +105,7 @@ function Calling1() {
           <button onClick={startListening}>🎤</button>
         </div>
       )}
+      <BottomIcons/>
     </div>
   );
 }

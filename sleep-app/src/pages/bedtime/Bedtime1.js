@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import TopBar from '../../components/overall/TopBar';
+import BottomIcons from '../../components/overall/BottomIcons';
 
 function App() {
   const [genre, setGenre] = useState('');
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <div className="App">
+      <TopBar/>
       <h1>Bedtime Story Generator</h1>
       <div>
         <label>
@@ -57,6 +60,7 @@ function App() {
         <h2>Your Bedtime Story</h2>
         <p>{story}</p>
       </div>
+      <BottomIcons/>
     </div>
   );
 }
