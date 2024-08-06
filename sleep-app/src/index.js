@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Home from './Home';
+import CallingHome from './pages/callingAI/AlarmHome.js';
 import Calling1 from './pages/callingAI/Calling1.js';
 import Bedtime1 from './pages/bedtime/Bedtime1.js';
 import Character1 from './pages/characterAI/Character1.js';
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/calling",
+    element: <CallingHome />
+  },
+  {
+    path: "/calling1",
     element: <Calling1 />
   },
   {
