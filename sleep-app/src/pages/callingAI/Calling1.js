@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import BottomIcons from '../../components/overall/BottomIcons';
 import TopBar from '../../components/overall/TopBar';
 
@@ -7,11 +8,17 @@ function Calling1() {
   const [inputText, setInputText] = useState('');
   const [conversation, setConversation] = useState([]);
   const [conversationStarted, setConversationStarted] = useState(false);
+  const [date, setDate] = useState('');
   
   //speech stuff
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance;
   const recognition = new SpeechRecognition();
+
+  useEffect(() => {
+    const currentDate = moment().format('YYYY-MM-DD');
+    setDate(currentDate);
+  }, []);
 
   //event handler for our input box
   const handleInputChange = (e) => {
@@ -29,6 +36,7 @@ function Calling1() {
         },
         body: JSON.stringify({
           "conversation_history": conversation.join('\n'),
+          "date": date
         }),
       });
   
