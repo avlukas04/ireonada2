@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BottomIcons from '../../components/overall/BottomIcons';
-import TopBar from '../../components/overall/TopBar';
+import { Box, Button, TextField, Typography, Container, Stack, Paper } from '@mui/material';
 
 function Character1() {
   const [aiName, setAiName] = useState('');
@@ -25,7 +24,7 @@ function Character1() {
           }),
         }
       );
-
+      
       if (response.ok) {
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
@@ -52,19 +51,19 @@ function Character1() {
 
   const handleSave = () => {
     // save logic
-    //console.log('Save functionality goes here');
+    //console.log('Save function');
   };
 
   useEffect(() => {
     if (imageUrl) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
-
+      
       const img = new Image();
       img.onload = () => {
         canvas.width = 512;
         canvas.height = 512;
-
+        
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       };
       img.src = imageUrl;
@@ -72,46 +71,43 @@ function Character1() {
   }, [imageUrl]);
 
   return (
-    <div>
-      <TopBar/>
-      <div style={{ textAlign: 'center', padding: '16px', boxSizing: 'border-box' }}>
-        <h3 style={{ fontSize: '18px' }}>Welcome, User</h3>
-        <p style={{ fontSize: '14px' }}>Enter a name and description for your AI character and press Generate to meet your AI companion!</p>
+    <Container maxWidth="sm">
+      <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
+        <Typography variant="h5" gutterBottom>Welcome, User</Typography>
+        <Typography variant="body1" gutterBottom>
+          Enter a name and description for your AI character and press Generate to meet your AI companion!
+        </Typography>
+        
+        <Stack spacing={2} alignItems="center">
+          <TextField
+            label="AI Name"
+            value={aiName}
+            onChange={(e) => setAiName(e.target.value)}
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            variant="outlined"
+            fullWidth
+          />
+          <Button variant="contained" onClick={handleGenerate}>Generate</Button>
+        </Stack>
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '16px' }}>
-          <div style={{ marginBottom: '8px' }}>
-            <input
-              type="text"
-              value={aiName}
-              onChange={(e) => setAiName(e.target.value)}
-              placeholder="Enter AI name here"
-              style={{ width: '100%', maxWidth: '300px', padding: '8px', boxSizing: 'border-box', textAlign: 'center', marginBottom: '8px' }}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Enter description here"
-              style={{ width: '100%', maxWidth: '300px', padding: '8px', boxSizing: 'border-box', textAlign: 'center' }}
-            />
-          </div>
-          <button onClick={handleGenerate} style={{ marginTop: '8px', padding: '8px 16px' }}>Generate</button>
-        </div>
-
-        <canvas ref={canvasRef} style={{ border: '1px solid #ccc', maxWidth: '100%', maxHeight: '300px' }} />
-        {imageUrl && (
-          <div style={{ marginTop: '16px' }}>
-            <button onClick={handleRegenerate} style={{ padding: '8px 16px', marginRight: '8px' }}>Regenerate</button>
-            <button onClick={handleSave} style={{ padding: '8px 16px', marginRight: '8px' }}>Save</button>
-            <button onClick={handleNext} style={{ padding: '8px 16px' }}>Next</button>
-          </div>
-        )}
-
-      </div>
-      <BottomIcons />
-    </div>
+        <Box mt={2}>
+          <canvas ref={canvasRef} style={{ border: '1px solid #ccc', maxWidth: '100%', maxHeight: '300px' }} />
+          {imageUrl && (
+            <Stack direction="row" spacing={2} justifyContent="center" mt={2}>
+              <Button variant="contained" onClick={handleRegenerate}>Regenerate</Button>
+              <Button variant="contained" onClick={handleSave}>Save</Button>
+              <Button variant="contained" onClick={handleNext}>Next</Button>
+            </Stack>
+          )}
+        </Box>
+      </Paper>
+    </Container>
   );
 }
 
