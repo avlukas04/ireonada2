@@ -15,6 +15,7 @@ function App() {
   const [storyGenerated, setStoryGenerated] = useState(false);
   const [imageDescriptions, setImageDescriptions] = useState([]);
   const [imageUrls, setImageUrls] = useState({});
+  const [isReading, setIsReading] = useState(false);
 
   const generateStory = async () => {
     setIsLoading(true);
@@ -79,8 +80,8 @@ function App() {
       return line.split(' ').map(word => {
         const imageUrl = placeholderToImageUrl[word];
         if (imageUrl) {
-          const altText = word.substring(1, word.length - 1);
-          return `<img src="${encodeURI(imageUrl)}" alt="${altText}" class="story-image" />`;
+          const altText = imageDescriptions.find((desc, index) => `[picture${index + 1}]` === word);
+          return `<img src="${encodeURI(imageUrl)}" alt="${altText || 'Image'}" class="story-image" />`;
         }
         return word;
       }).join(' ');
@@ -97,6 +98,30 @@ function App() {
     setStory('');
     setStoryGenerated(false);
     setImageUrls({});
+  };
+
+  const speak = (text) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+    
+    let speechText = doc.body.textContent || '';
+    const imgElements = doc.querySelectorAll('img');
+    imgElements.forEach(img => {
+      const altText = img.getAttribute('alt') || 'Image';
+      speechText += ` Image of ${altText}`;
+    });
+
+    const utterance = new SpeechSynthesisUtterance(speechText);
+    utterance.rate = 1.35;
+    utterance.pitch = 1.4;
+    utterance.onstart = () => setIsReading(true);
+    utterance.onend = () => setIsReading(false);
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const stopReading = () => {
+    window.speechSynthesis.cancel();
+    setIsReading(false);
   };
 
   useEffect(() => {
@@ -142,7 +167,11 @@ function App() {
           <button onClick={generateStory}>Generate Story</button>
         </>
       ) : (
-        <button onClick={resetStory}>Generate New Story</button>
+        <>
+          <button onClick={resetStory}>Generate New Story</button>
+          <button onClick={() => speak(story)} disabled={isReading}>Read Story</button>
+          <button onClick={stopReading} disabled={!isReading}>Stop Reading</button>
+        </>
       )}
       <div>
         <h2>Your Bedtime Story</h2>
