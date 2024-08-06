@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Container, Paper, Stack } from '@mui/material';
+import BottomIcons from '/Users/avneet/Desktop/ireonada2/sleep-app/src/components/overall/BottomIcons.js';
+import TopBar from '/Users/avneet/Desktop/ireonada2/sleep-app/src/components/overall/TopBar.js';
 
 function Character2() {
   const location = useLocation();
