@@ -10,7 +10,7 @@ function Character5_lb() {
 
   const leaderboardData = [
     { rank: 1, name: 'John Doe', age: 25 },
-    { rank: 2, name: aiName || 'Jane Smith', age: 30 },
+    { rank: 2, name: aiName || 'Your AI', age: 30 },
     { rank: 3, name: 'Alice Johnson', age: 22 },
     { rank: 4, name: 'Bob Brown', age: 28 },
     { rank: 5, name: 'Charlie Davis', age: 35 }
