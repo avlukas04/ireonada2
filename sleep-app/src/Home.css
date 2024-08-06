@@ -1,0 +1,44 @@
+.homepage-hello {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 30px;
+    background-color: #25C6FF;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.blue-background {
+    background-color: #25C6FF;
+}
+
+.center-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.example-characters {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    background-color: #25C6FF;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+}
+
+.homepage-caption {
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 1%;
+
+}

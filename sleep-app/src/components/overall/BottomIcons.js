@@ -6,9 +6,9 @@ import Paper from '@mui/material/Paper';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useLocation } from 'react-router-dom';
+import AutoStoriesRoundedIcon from '@mui/icons-material/AutoStoriesRounded';
 
 
 
@@ -50,7 +50,7 @@ function BottomIcons() {
                             <BottomNavigationAction href="/" label="Home" icon={<HomeIcon />} />
                             <BottomNavigationAction href="/calling" label="Alarm" icon={<AccessAlarmIcon />} />
                             <BottomNavigationAction href="/character" label="Characters" icon={<PersonIcon />} />
-                            <BottomNavigationAction href="/" label="More" icon={<FormatListBulletedIcon />} />
+                            <BottomNavigationAction href="/bedtime" label="Bedtime Story" icon={<AutoStoriesRoundedIcon />} />
                         </BottomNavigation>
                     </Paper>
                 </Box>
