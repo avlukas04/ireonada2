@@ -19,11 +19,11 @@ function App() {
   const generateStory = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('https://noggin.rea.gent/sore-guan-3091', {
+      const response = await fetch('https://noggin.rea.gent/planned-marten-7960', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer rg_v1_nt10gnv9ko0mqeihxzoqw3c6tx5hmqc9wb9o_ngk',
+          Authorization: 'Bearer rg_v1_ixka3dkqd6utwwykaz0o5mu4x7hc8lqytmpo_ngk',
         },
         body: JSON.stringify({
           genre,
@@ -50,15 +50,15 @@ function App() {
   const fetchImageUrls = async (descriptions) => {
     const updatedPlaceholderToImageUrl = await Promise.all(
       descriptions.map(async (desc, index) => {
-        const response = await fetch('https://noggin.rea.gent/remaining-rook-3952', {
+        const response = await fetch('https://noggin.rea.gent/dead-wildfowl-3512', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer rg_v1_o5rz5m16cr9lypy3cvyj0fxukiftiakox4jz_ngk',
+            Authorization: 'Bearer rg_v1_01jr7hhqws2utxtixhpqq6ljq9f4untrt05e_ngk',
           },
           body: JSON.stringify({ description: desc }),
         });
-        const imageUrl = response.url; // Assuming the response is the image URL
+        const imageUrl = response.url;
         return { [`[picture${index + 1}]`]: imageUrl };
       })
     ).then(results => Object.assign({}, ...results));
