@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography, Container, Stack, Paper } from '@mui/material';
+import BottomIcons from '/Users/avneet/Desktop/ireonada2/sleep-app/src/components/overall/BottomIcons.js';
+import TopBar from '/Users/avneet/Desktop/ireonada2/sleep-app/src/components/overall/TopBar.js';
 
 function Character1() {
   const [aiName, setAiName] = useState('');
@@ -9,7 +11,7 @@ function Character1() {
   const canvasRef = useRef(null);
   const navigate = useNavigate();
 
-  const fetchImage = async () => {
+  const fetchImage = async (desc) => {
     try {
       const response = await fetch(
         'https://noggin.rea.gent/arrogant-kangaroo-3642',
@@ -20,7 +22,7 @@ function Character1() {
             Authorization: 'Bearer rg_v1_9ouhh9rz2qvqvckja414scuwk8vl1ps9xvnf_ngk',
           },
           body: JSON.stringify({
-            description: description,
+            description: desc,
           }),
         }
       );
@@ -38,11 +40,34 @@ function Character1() {
   };
 
   const handleGenerate = () => {
-    fetchImage();
+    fetchImage(description);
   };
 
   const handleRegenerate = () => {
-    fetchImage();
+    fetchImage(description);
+  };
+
+  const handleAutoGenerate = async () => {
+    try {
+      const response = await fetch(
+        'https://noggin.rea.gent/external-beaver-5333',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer rg_v1_srl5w0zyalhylfs8gu4sbb1jt1coohj04zmu_ngk',
+          },
+          body: JSON.stringify({
+            // fill variables here if needed
+          }),
+        }
+      ).then(response => response.text());
+
+      setDescription(response);
+      fetchImage(response);
+    } catch (error) {
+      console.error('Error auto-generating description:', error);
+    }
   };
 
   const handleNext = () => {
@@ -73,12 +98,10 @@ function Character1() {
   return (
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
-        <Typography variant="h5" gutterBottom>Welcome, User</Typography>
-        <Typography variant="body1" gutterBottom>
-          Enter a name and description for your AI character and press Generate to meet your AI companion!
-        </Typography>
+        <Typography variant="h5" gutterBottom>Meet your AI companion!</Typography>
         
         <Stack spacing={2} alignItems="center">
+          <Typography variant="body1">Enter a name for your AI companion</Typography>
           <TextField
             label="AI Name"
             value={aiName}
@@ -86,6 +109,7 @@ function Character1() {
             variant="outlined"
             fullWidth
           />
+          <Typography variant="body1">Enter a description for your AI companion or Auto-Generate one!</Typography>
           <TextField
             label="Description"
             value={description}
@@ -93,7 +117,10 @@ function Character1() {
             variant="outlined"
             fullWidth
           />
-          <Button variant="contained" onClick={handleGenerate}>Generate</Button>
+          <Stack direction="row" spacing={2}>
+            <Button variant="contained" onClick={handleGenerate}>Generate</Button>
+            <Button variant="contained" onClick={handleAutoGenerate}>Auto-Generate</Button>
+          </Stack>
         </Stack>
 
         <Box mt={2}>
