@@ -8,6 +8,8 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from 'react-router-dom';
+import Animal2 from '../../images/animal2.png';
+
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -75,7 +77,7 @@ function TopBar({ imageUrl }) {
                         </Typography>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <Avatar alt="AI Character" src={imageUrl} />
+                            <Avatar alt="AI Character" src={Animal2} />
                         </Box>
                     </Toolbar>
                 </Container>

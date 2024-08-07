@@ -4,10 +4,25 @@ import BottomIcons from '../../components/overall/BottomIcons';
 import TopBar from '../../components/overall/TopBar';
 import './AlarmHome.css';
 import alarmSound from './ringtones/wakey_wakey.mp3';
+import Button from '@mui/material/Button';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import TextField from '@mui/material/TextField';
+import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 
 const AlarmHome = () => {
   const navigate = useNavigate();
-  const [alarmTime, setAlarmTime] = useState(new Date());
+  const [alarmTime, setAlarmTime] = useState(dayjs(new Date()));
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [alarms, setAlarms] = useState([]);
   const [alarmRinging, setAlarmRinging] = useState(false);
@@ -52,7 +67,7 @@ const AlarmHome = () => {
   };
 
   const handleAddAlarm = () => {
-    const alarmTimeString = `${alarmTime.getHours().toString().padStart(2, '0')}:${alarmTime.getMinutes().toString().padStart(2, '0')}`;
+    const alarmTimeString = alarmTime.format('HH:mm');
     if (!alarms.includes(alarmTimeString)) {
       const newAlarms = [...alarms, alarmTimeString];
       newAlarms.sort((a, b) => {
@@ -80,20 +95,15 @@ const AlarmHome = () => {
     setShowTimePicker(false);
   };
 
-  const handleTimeChange = (event) => {
-    if (event.target.value) {
-      const [hours, minutes] = event.target.value.split(':').map(Number);
-      const newAlarmTime = new Date();
-      newAlarmTime.setHours(hours, minutes, 0);
-      setAlarmTime(newAlarmTime);
-    }
+  const handleTimeChange = (time) => {
+    setAlarmTime(time);
   };
 
   if (alarmRinging) {
     return (
       <div className="alarm-container">
         <h1>Alarm is ringing!</h1>
-        <button onClick={handleAccept} className="alarm-button">Accept</button>
+        <Button variant="contained" sx={{ backgroundColor: '#25C6FF'}} onClick={handleAccept} className="alarm-button">Accept</Button>
       </div>
     );
   }
@@ -102,36 +112,54 @@ const AlarmHome = () => {
     <div className="alarm-container">
       <TopBar />
       <div>
-        <h1>Welcome to Alarm Home</h1>
-        <button onClick={navigateToCalling1} className="alarm-button">Go to Calling1</button>
+        <h1 className="your-alarm">Your Alarms</h1>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Button variant="contained" onClick={navigateToCalling1}
+            className="alarm-button"
+            sx={{ backgroundColor: '#25C6FF' }}>Start Calling AI</Button>
+        </Box>
         <div className="clock-container">
-          <button onClick={showTimePickerModal} className="alarm-button">Add Alarm</button>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button variant="text"  onClick={showTimePickerModal} className="alarm-button"><AddCircleOutlineIcon sx={{ color: '#25C6FF' }}/></Button>
+          </div>
           {showTimePicker && (
             <>
-              <div className="clock-text">
-                {alarmTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              <div className="timepicker">
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileTimePicker 
+              onAccept={handleTimeChange}
+                 value={alarmTime} />
+                 </LocalizationProvider>
+              
+              <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={handleAddAlarm} className="alarm-button">Save</Button>
+              <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={() => { setShowTimePicker(false); }} className="cancel-button">Cancel</Button>
               </div>
-              <input
-                type="time"
-                onChange={handleTimeChange}
-                className="alarm-time-picker"
-                onClick={() => setShowTimePicker(true)}
-                onFocus={() => setShowTimePicker(true)}
-              />
-              <button onClick={handleAddAlarm} className="alarm-button">Save Alarm</button>
-              <button onClick={() => { setShowTimePicker(false); }} className="cancel-button">Cancel</button>
             </>
           )}
         </div>
         <div>
-          <ul className="alarm-list">
-            {alarms.map((alarm, index) => (
-              <li key={index} className="alarm-item">
-                {alarm}
-                <button onClick={() => handleDeleteAlarm(index)} className="delete-button">Delete</button>
-              </li>
-            ))}
-          </ul>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+            <List className="alarm-list">
+              {alarms.map((alarm, index) => (
+
+                <Card sx={{ width: '100%' }}>
+                  <CardContent>
+                    <div className="one-alarm">
+                      <ListItemText primary={alarm} />
+                      <Button variant="contained" sx={{ backgroundColor: '#25C6FF', '&:hover': {
+      backgroundColor: '#25C6FF', // Background color when hovered
+    },
+    '&:focus': {
+      backgroundColor: '#25C6FF', // Background color when focused
+    }}} onClick={() => handleDeleteAlarm(index)} className="delete-button">
+                        Delete
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </List>
+          </Box>
         </div>
       </div>
       <BottomIcons />

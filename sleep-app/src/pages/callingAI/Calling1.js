@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import BottomIcons from '../../components/overall/BottomIcons';
 import TopBar from '../../components/overall/TopBar';
+import Button from '@mui/material/Button';
+import MicIcon from '@mui/icons-material/Mic';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
+
 
 function Calling1() {
   //sets the blank input text and conversation
@@ -86,13 +92,35 @@ function Calling1() {
   return (
     <div>
       <TopBar/>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: "40px"}}>
         {!conversationStarted && (
-          <button onClick={handleStartConversation}>Start Conversation</button>
+
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF'}} onClick={handleStartConversation} className="start-convo">Start Conversation</Button>
         )}
       </div>
-      <div>
-        <h2>Conversation History</h2>
+     
+      {conversationStarted && (
+        <div className="mic-group" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px'}}>
+          <TextField
+            type="text"
+            value={inputText}
+            onChange={handleInputChange}
+            placeholder="Type a message"
+          />
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF',
+        '&:hover': {
+          backgroundColor: '#25C6FF', 
+        },
+        '&:focus': {
+          backgroundColor: '#25C6FF', 
+        },
+       }} onClick={() => handleSend(inputText)}>Send</Button>
+          <Button variant="text" onClick={startListening}><MicIcon sx={{ color: '#25C6FF' }}/></Button>
+        </div>
+      )}
+       <div>
+       <Box sx={{ maxWidth: '86%', margin: '0 auto' }}>
+        <h2 className="your-alarm">Conversation History</h2>
         <div>
           {conversation.map((message, index) => (
             <div key={index}>
@@ -100,19 +128,8 @@ function Calling1() {
             </div>
           ))}
         </div>
+        </Box>
       </div>
-      {conversationStarted && (
-        <div>
-          <input
-            type="text"
-            value={inputText}
-            onChange={handleInputChange}
-            placeholder="Type a message"
-          />
-          <button onClick={() => handleSend(inputText)}>Send</button>
-          <button onClick={startListening}>🎤</button>
-        </div>
-      )}
       <BottomIcons/>
     </div>
   );
