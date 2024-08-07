@@ -189,8 +189,9 @@ function Bedtime1() {
             rehypePlugins={[rehypeRaw]}
           />
         )}
-      </Box>
+
       <BottomIcons />
+    </div>
     </div>
   );
 }
