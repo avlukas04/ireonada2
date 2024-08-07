@@ -77,8 +77,6 @@ function Character1() {
     
             localStorage.setItem('savedImage', dataURL);
             localStorage.setItem('savedName', aiName);
-    
-            console.log('Image saved to localStorage');
         }
 
         navigate('/character2', { state: { aiName, imageUrl } }); // pass data to Character2
@@ -92,8 +90,7 @@ function Character1() {
             const dataURL = canvas.toDataURL('image/png');
     
             localStorage.setItem('savedImage', dataURL);
-    
-            console.log('Image saved to localStorage');
+            localStorage.setItem('savedName', aiName);
         }
     };
 
