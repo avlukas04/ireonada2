@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import MicIcon from '@mui/icons-material/Mic';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Calling1() {
   const [inputText, setInputText] = useState('');
@@ -115,34 +115,13 @@ function Calling1() {
 
   return (
     <div>
-      <TopBar/>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: "40px"}}>
-        {conversationStarted ? (
-          <Button variant="contained" sx={{ backgroundColor: '#FF3B3B' }} onClick={handleStopConversation} className="stop-convo">Stop Conversation</Button>
-        ) : (
-          <Button variant="contained" sx={{ backgroundColor: '#25C6FF'}} onClick={handleStartConversation} className="start-convo">Start Conversation</Button>
+      <TopBar />
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: "40px" }}>
+        {!conversationStarted && (
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={handleStartConversation} className="start-convo">Start Conversation</Button>
         )}
       </div>
-     
-      {conversationStarted && (
-        <div className="mic-group" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px'}}>
-          <TextField
-            type="text"
-            value={inputText}
-            onChange={handleInputChange}
-            placeholder="Type a message"
-          />
-          <Button variant="contained" sx={{ backgroundColor: '#25C6FF',
-        '&:hover': {
-          backgroundColor: '#25C6FF', 
-        },
-        '&:focus': {
-          backgroundColor: '#25C6FF', 
-        },
-       }} onClick={() => handleSend(inputText)}>Send</Button>
-          <Button variant="text" onClick={startListening}><MicIcon sx={{ color: '#25C6FF' }}/></Button>
-        </div>
-      )}
+
       <div>
         <Box sx={{ maxWidth: '86%', margin: '0 auto' }}>
           <h2 className="your-alarm">Conversation History</h2>
@@ -155,7 +134,27 @@ function Calling1() {
           </div>
         </Box>
       </div>
-      <BottomIcons/>
+
+      {conversationStarted && (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+          <div className="mic-group" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <TextField
+              type="text"
+              value={inputText}
+              onChange={handleInputChange}
+              placeholder="Type a message"
+            />
+            <Button variant="contained" sx={{ backgroundColor: '#25C6FF', '&:hover': { backgroundColor: '#25C6FF' } }} onClick={() => handleSend(inputText)}>Send</Button>
+            <Button variant="text" onClick={startListening}><MicIcon sx={{ color: '#25C6FF' }} /></Button>
+          </div>
+          
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: "20px" }}>
+            <Button variant="contained" sx={{ backgroundColor: '#FF3B3B', fontSize: '18px', padding: '12px 24px' }} onClick={handleStopConversation} className="stop-convo">I'm Awake!</Button>
+          </div>
+        </div>
+      )}
+
+      <BottomIcons />
     </div>
   );
 }
