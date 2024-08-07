@@ -71,12 +71,30 @@ function Character1() {
     };
 
     const handleNext = () => {
+        if (canvasRef.current) {
+            const canvas = canvasRef.current;
+            const dataURL = canvas.toDataURL('image/png');
+    
+            localStorage.setItem('savedImage', dataURL);
+            localStorage.setItem('savedName', aiName);
+    
+            console.log('Image saved to localStorage');
+        }
+
         navigate('/character2', { state: { aiName, imageUrl } }); // pass data to Character2
     };
 
     const handleSave = () => {
         // save logic
         //console.log('Save function');
+        if (canvasRef.current) {
+            const canvas = canvasRef.current;
+            const dataURL = canvas.toDataURL('image/png');
+    
+            localStorage.setItem('savedImage', dataURL);
+    
+            console.log('Image saved to localStorage');
+        }
     };
 
     useEffect(() => {

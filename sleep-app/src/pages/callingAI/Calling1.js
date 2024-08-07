@@ -57,7 +57,8 @@ function Calling1() {
       });
 
       const responseData = await response.text();
-      return `Character Name: ${responseData}`;
+      const savedName = localStorage.getItem('savedName');
+      return `${savedName || 'Character Name'}: ${responseData}`;
     } catch (error) {
       console.error('Error fetching response:', error);
       return 'An error occurred while fetching the response.';
