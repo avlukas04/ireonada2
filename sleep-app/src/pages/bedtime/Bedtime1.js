@@ -141,9 +141,9 @@ function Bedtime1() {
   return (
     <div className="App">
       <TopBar />
-      <h1>Bedtime Story Generator</h1>
-      {!storyGenerated ? (
-        <Box sx={{ padding: '20px' }}>
+      <Box sx={{ paddingBottom: '40px' }}> {}
+        <h1>Bedtime Story Generator</h1>
+        {!storyGenerated ? (
           <Box sx={{ marginBottom: '20px' }}>
             <TextField
               label="Genre"
@@ -152,62 +152,80 @@ function Bedtime1() {
               value={genre}
               onChange={(e) => setGenre(e.target.value)}
             />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
             <TextField
               label="Setting"
               variant="outlined"
               fullWidth
               value={setting}
               onChange={(e) => setSetting(e.target.value)}
+              sx={{ marginTop: '20px' }}
             />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
             <TextField
               label="Additional Details"
               variant="outlined"
               fullWidth
               value={addDetails}
               onChange={(e) => setAddDetails(e.target.value)}
+              sx={{ marginTop: '20px' }}
             />
-          </Box>
-          <Box sx={{ marginBottom: '20px' }}>
             <TextField
               label="Ending"
               variant="outlined"
               fullWidth
               value={ending}
               onChange={(e) => setEnding(e.target.value)}
+              sx={{ marginTop: '20px' }}
             />
+            <Button
+              variant="contained"
+              onClick={generateStory}
+              disabled={isLoading}
+              sx={{ marginTop: '20px' }}
+            >
+              Generate Story
+            </Button>
           </Box>
-          <Button variant="contained" onClick={generateStory} disabled={isLoading}>
-            Generate Story
-          </Button>
-        </Box>
-      ) : (
-        <Box sx={{ padding: '20px' }}>
-          <Button variant="contained" onClick={resetStory} sx={{ marginRight: '10px' }}>
-            Generate New Story
-          </Button>
-          <Button variant="contained" onClick={() => speak(story)} disabled={isReading} sx={{ marginRight: '10px' }}>
-            Read Story
-          </Button>
-          <Button variant="contained" onClick={stopReading} disabled={!isReading}>
-            Stop Reading
-          </Button>
-        </Box>
-      )}
-      <Box sx={{ padding: '20px' }}>
-        <h2>Your Bedtime Story</h2>
-        {isLoading ? (
-          <p>Generating...</p>
         ) : (
-          <ReactMarkdown
-            children={story}
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-          />
+          <Box sx={{}}>
+            <Button
+              variant="contained"
+              onClick={resetStory}
+              sx={{ marginBottom: '10px', marginLeft: '5px' }}
+            >
+              Generate New Story
+            </Button>
+            <Box sx={{ display: 'flex', gap: '10px', padding: '10px 0', marginLeft: '5px' }}>
+              <Button
+                variant="contained"
+                onClick={() => speak(story)}
+                disabled={isReading}
+                sx={{ padding: '8px 16px' }}
+              >
+                Read Story
+              </Button>
+              <Button
+                variant="contained"
+                onClick={stopReading}
+                disabled={!isReading}
+                sx={{ padding: '8px 16px' }}
+              >
+                Stop Reading
+              </Button>
+            </Box>
+          </Box>
         )}
+        <Box sx={{ padding: '10px' }}>
+          <h2>Your Bedtime Story</h2>
+          {isLoading ? (
+            <p>Generating...</p>
+          ) : (
+            <ReactMarkdown
+              children={story}
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+            />
+          )}
+        </Box>
       </Box>
       <BottomIcons />
     </div>
