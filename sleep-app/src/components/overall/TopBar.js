@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from 'react-router-dom';
-import Animal2 from '../../images/animal2.png';
+import defaultAvatar from '../../images/default.png';
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
@@ -20,6 +20,9 @@ function TopBar({ imageUrl }) {
     const handleBackClick = () => {
         navigate(-1); 
     };
+
+    const savedImage = localStorage.getItem('savedImage');
+    const avatarSrc = savedImage ? savedImage : defaultAvatar;
 
     return (
         <div>
@@ -77,7 +80,7 @@ function TopBar({ imageUrl }) {
                         </Typography>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <Avatar alt="AI Character" src={Animal2} />
+                            <Avatar alt="AI Character" src={avatarSrc} />
                         </Box>
                     </Toolbar>
                 </Container>

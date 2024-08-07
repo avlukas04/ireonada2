@@ -5,11 +5,12 @@ import rehypeRaw from 'rehype-raw';
 import TopBar from '../../components/overall/TopBar';
 import HomeTopBar from '../../components/overall/HomeTopBar';
 import BottomIcons from '../../components/overall/BottomIcons';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import './Bedtime1.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
-function App() {
+function Bedtime1() {
   const [genre, setGenre] = useState('');
   const [setting, setSetting] = useState('');
   const [addDetails, setAddDetails] = useState('');
@@ -144,45 +145,41 @@ function App() {
       <h1 className="your-alarm">Bedtime Story Generator</h1>
       {!storyGenerated ? (
         <>
-          <div className="story-context">
-            <div>
-              <label>
-                Genre:
-                <TextField type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Setting:
-                <TextField type="text" value={setting} onChange={(e) => setSetting(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Additional Details:
-                <TextField type="text" value={addDetails} onChange={(e) => setAddDetails(e.target.value)} />
-              </label>
-            </div>
-            <div>
-              <label>
-                Ending:
-                <TextField type="text" value={ending} onChange={(e) => setEnding(e.target.value)} />
-              </label>
-            </div>
+          <div>
+            <label>
+              Genre:
+              <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+            </label>
           </div>
-          <div className="story-generate">
-            <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={generateStory}>Generate Story</Button>
+          <div>
+            <label>
+              Setting:
+              <input type="text" value={setting} onChange={(e) => setSetting(e.target.value)} />
+            </label>
           </div>
+          <div>
+            <label>
+              Additional Details:
+              <input type="text" value={addDetails} onChange={(e) => setAddDetails(e.target.value)} />
+            </label>
+          </div>
+          <div>
+            <label>
+              Ending:
+              <input type="text" value={ending} onChange={(e) => setEnding(e.target.value)} />
+            </label>
+          </div>
+          <button onClick={generateStory}>Generate Story</button>
         </>
       ) : (
         <>
-          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={resetStory}>Generate New Story</Button>
-          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={() => speak(story)} disabled={isReading}>Read Story</Button>
-          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={stopReading} disabled={!isReading}>Stop Reading</Button>
+          <button onClick={resetStory}>Generate New Story</button>
+          <button onClick={() => speak(story)} disabled={isReading}>Read Story</button>
+          <button onClick={stopReading} disabled={!isReading}>Stop Reading</button>
         </>
       )}
-      <div className="story-body">
-        <h2 className="your-alarm">Your Bedtime Story</h2>
+      <div>
+        <h2>Your Bedtime Story</h2>
         {isLoading ? (
           <p>Generating...</p>
         ) : (
@@ -192,10 +189,10 @@ function App() {
             rehypePlugins={[rehypeRaw]}
           />
         )}
-      </div>
+      </Box>
       <BottomIcons />
     </div>
   );
 }
 
-export default App;
+export default Bedtime1;

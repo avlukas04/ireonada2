@@ -102,7 +102,7 @@ const AlarmHome = () => {
   if (alarmRinging) {
     return (
       <div className="alarm-container">
-        <h1 >Alarm is ringing!</h1>
+        <h1>Alarm is ringing!</h1>
         <Button variant="contained" sx={{ backgroundColor: '#25C6FF'}} onClick={handleAccept} className="alarm-button">Accept</Button>
       </div>
     );
@@ -110,48 +110,48 @@ const AlarmHome = () => {
 
   return (
     <div className="alarm-container">
-      <div>
-        <TopBar/>
-        <h1 className="your-alarm">Your Alarms</h1>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-          <Button variant="contained" onClick={navigateToCalling1}
-            className="alarm-button"
-            sx={{ backgroundColor: '#25C6FF' }}>Start Calling AI</Button>
-        </Box>
-        <div className="clock-container">
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button variant="text"  onClick={showTimePickerModal} className="alarm-button"><AddCircleOutlineIcon sx={{ color: '#25C6FF' }}/></Button>
-          </div>
-          {showTimePicker && (
-            <>
-              <div className="timepicker">
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <MobileTimePicker 
-              onAccept={handleTimeChange}
-                 value={alarmTime} />
-                 </LocalizationProvider>
-              
-              <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={handleAddAlarm} className="alarm-button">Save</Button>
-              <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={() => { setShowTimePicker(false); }} className="cancel-button">Cancel</Button>
-              </div>
-            </>
-          )}
+      <TopBar />
+      {alarmRinging ? (
+        <div style={{ textAlign: 'center' }}>
+          <h1>Alarm is ringing!</h1>
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={handleAccept} className="alarm-button">Accept</Button>
         </div>
-        <div>
+      ) : (
+        <>
+          <h1 className="your-alarm">Your Alarms</h1>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+            <Button variant="contained" onClick={navigateToCalling1} className="alarm-button" sx={{ backgroundColor: '#25C6FF' }}>Start Calling AI</Button>
+          </Box>
+          <div className="clock-container">
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button variant="text" onClick={showTimePickerModal} className="alarm-button"><AddCircleOutlineIcon sx={{ color: '#25C6FF' }} /></Button>
+            </div>
+            {showTimePicker && (
+              <div className="timepicker">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <MobileTimePicker onAccept={handleTimeChange} value={alarmTime} />
+                </LocalizationProvider>
+                <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={handleAddAlarm} className="alarm-button">Save</Button>
+                <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={hideTimePickerModal} className="cancel-button">Cancel</Button>
+              </div>
+            )}
+          </div>
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
             <List className="alarm-list">
               {alarms.map((alarm, index) => (
-
-                <Card sx={{ width: '100%' }}>
+                <Card sx={{ width: '100%' }} key={index}>
                   <CardContent>
                     <div className="one-alarm">
                       <ListItemText primary={alarm} />
-                      <Button variant="contained" sx={{ backgroundColor: '#25C6FF', '&:hover': {
-      backgroundColor: '#25C6FF', // Background color when hovered
-    },
-    '&:focus': {
-      backgroundColor: '#25C6FF', // Background color when focused
-    }}} onClick={() => handleDeleteAlarm(index)} className="delete-button">
+                      <Button
+                        variant="contained"
+                        sx={{
+                          backgroundColor: '#25C6FF',
+                          '&:hover': { backgroundColor: '#25C6FF' },
+                          '&:focus': { backgroundColor: '#25C6FF' }
+                        }}
+                        onClick={() => handleDeleteAlarm(index)}
+                        className="delete-button">
                         Delete
                       </Button>
                     </div>
@@ -160,8 +160,8 @@ const AlarmHome = () => {
               ))}
             </List>
           </Box>
-        </div>
-      </div>
+        </>
+      )}
       <BottomIcons />
     </div>
   );
