@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import Animal2 from '../../images/animal2.png';
+import defaultAvatar from '../../images/default.png';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -21,6 +21,9 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function HomeTopBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const savedImage = localStorage.getItem('savedImage');
+    const avatarSrc = savedImage ? savedImage : defaultAvatar;
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -91,7 +94,7 @@ function HomeTopBar() {
                      
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <Avatar alt="Remy Sharp" src={Animal2} />
+                            <Avatar alt="AI Character" src={avatarSrc} />
                         </Box>
                     </Toolbar>
                 </Container>
