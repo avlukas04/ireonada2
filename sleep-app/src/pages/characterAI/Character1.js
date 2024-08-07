@@ -163,19 +163,19 @@ function Character1() {
                                 >
                                     Regenerate
                                 </Button>
-                                <Button 
+                                {/* <Button 
                                     variant="contained" 
                                     onClick={handleSave} 
                                     sx={{ backgroundColor: '#25C6FF', '&:hover': { backgroundColor: '#1da9e0' } }}
                                 >
                                     Save
-                                </Button>
+                                </Button> */}
                                 <Button 
                                     variant="contained" 
                                     onClick={handleNext} 
                                     sx={{ backgroundColor: '#25C6FF', '&:hover': { backgroundColor: '#1da9e0' } }}
                                 >
-                                    Next
+                                    Save
                                 </Button>
                             </Stack>
                         )}

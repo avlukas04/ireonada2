@@ -9,16 +9,18 @@ import Avatar from '@mui/material/Avatar';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from 'react-router-dom';
 import defaultAvatar from '../../images/default.png';
+import { Link } from 'react-router-dom';
+
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function TopBar({ imageUrl }) {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleBackClick = () => {
-        navigate(-1); 
+        navigate(-1);
     };
 
     const savedImage = localStorage.getItem('savedImage');
@@ -79,8 +81,10 @@ function TopBar({ imageUrl }) {
                             Ireonada
                         </Typography>
 
-                        <Box sx={{ flexGrow: 0 }}>
-                            <Avatar alt="AI Character" src={avatarSrc} />
+                        <Box href="/character" sx={{ flexGrow: 0 }}>
+                            <Link to="/character" style={{ textDecoration: 'none' }}>
+                                <Avatar alt="AI Character" src={avatarSrc} />
+                            </Link>
                         </Box>
                     </Toolbar>
                 </Container>

@@ -62,7 +62,7 @@ function Home() {
           }} />
         </Box>
       </div>
-      <p className="homepage-caption">Explore cute characters</p>
+      <p className="homepage-caption">Example cute characters</p>
       <div className="example-characters">
         <Box
           component="img"
