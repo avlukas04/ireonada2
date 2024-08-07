@@ -62,63 +62,63 @@ function Character4_cl() {
 
   return (
     <div>
-      <TopBar/>
-    <Container maxWidth="sm">
-      <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
-        <Typography variant="h5" gutterBottom>Closet</Typography>
-        {updatedImageUrl && (
-          <Box mb={2}>
-            <img
-              src={updatedImageUrl}
-              alt="AI Character"
-              style={{ 
-                width: '150px', 
-                height: '150px', 
-                borderRadius: '50%', 
-                border: '2px solid #ccc',
-                objectFit: 'cover'
-              }}
-            />
+      <TopBar imageUrl={imageUrl}/>
+      <Container maxWidth="sm" sx={{ mt: 4 }}> {/* Add margin-top here */}
+        <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
+          <Typography variant="h5" gutterBottom>Closet</Typography>
+          {updatedImageUrl && (
+            <Box mb={2}>
+              <img
+                src={updatedImageUrl}
+                alt="AI Character"
+                style={{ 
+                  width: '150px', 
+                  height: '150px', 
+                  borderRadius: '50%', 
+                  border: '2px solid #ccc',
+                  objectFit: 'cover'
+                }}
+              />
+            </Box>
+          )}
+          {aiName && (
+            <Box mb={2}>
+              <Typography variant="h6" fontWeight="bold">{aiName}</Typography>
+            </Box>
+          )}
+          
+          {/* acc grid */}
+          <Box mt={4}>
+            <Grid container spacing={2} justifyContent="center">
+              {Object.keys(accessoryImages).map((accessoryName, index) => (
+                <Grid item key={index} xs={6} sm={4} md={3}>
+                  <Paper 
+                    elevation={1} 
+                    sx={{ padding: 1, textAlign: 'center', cursor: 'pointer' }} 
+                    onClick={() => handleAccessoryClick(accessoryName)}
+                  >
+                    <img
+                      src={accessoryImages[accessoryName]}
+                      alt={accessoryName}
+                      style={{ 
+                        width: '100%', 
+                        height: '100px', 
+                        objectFit: 'cover',
+                        borderRadius: '4px'
+                      }}
+                    />
+                    <Typography variant="body2" mt={1}>{accessoryName}</Typography>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
           </Box>
-        )}
-        {aiName && (
-          <Box mb={2}>
-            <Typography variant="h6" fontWeight="bold">{aiName}</Typography>
-          </Box>
-        )}
-        
-        {/* acc grid */}
-        <Box mt={4}>
-          <Grid container spacing={2} justifyContent="center">
-            {Object.keys(accessoryImages).map((accessoryName, index) => (
-              <Grid item key={index} xs={6} sm={4} md={3}>
-                <Paper 
-                  elevation={1} 
-                  sx={{ padding: 1, textAlign: 'center', cursor: 'pointer' }} 
-                  onClick={() => handleAccessoryClick(accessoryName)}
-                >
-                  <img
-                    src={accessoryImages[accessoryName]}
-                    alt={accessoryName}
-                    style={{ 
-                      width: '100%', 
-                      height: '100px', 
-                      objectFit: 'cover',
-                      borderRadius: '4px'
-                    }}
-                  />
-                  <Typography variant="body2" mt={1}>{accessoryName}</Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
 
-        {/* canvas to combine images */}
-        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
-      </Paper>
-    </Container>
-    <BottomIcons/>
+          {/* canvas to combine images */}
+          <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+        </Paper>
+      </Container>
+      <BottomIcons/>
     </div>
   );
 }

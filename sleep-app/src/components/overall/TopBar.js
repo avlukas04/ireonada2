@@ -4,27 +4,15 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import Animal2 from '../../images/animal2.png';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { useNavigate } from 'react-router-dom';
-
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function TopBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+function TopBar({ imageUrl }) {
     const navigate = useNavigate(); 
 
     const handleBackClick = () => {
@@ -32,12 +20,10 @@ function TopBar() {
     };
 
     return (
-
         <div>
             <AppBar position="static" sx={{ backgroundColor: '#25C6FF' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                         <Typography
                             variant="h6"
                             noWrap
@@ -65,9 +51,8 @@ function TopBar() {
                                 color="inherit"
                                 onClick={handleBackClick}
                             >
-                                <ArrowBackIosIcon/>
+                                <ArrowBackIosIcon />
                             </IconButton>
-                           
                         </Box>
                         <Typography
                             variant="h5"
@@ -88,17 +73,15 @@ function TopBar() {
                         >
                             Ireonada
                         </Typography>
-                     
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <Avatar alt="Remy Sharp" src={Animal2} />
+                            <Avatar alt="AI Character" src={imageUrl} />
                         </Box>
                     </Toolbar>
                 </Container>
             </AppBar>
-
         </div>
     )
 }
 
-export default TopBar
+export default TopBar;
