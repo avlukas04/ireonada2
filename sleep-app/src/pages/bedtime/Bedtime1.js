@@ -143,7 +143,7 @@ function Bedtime1() {
     <div className="App">
       <TopBar />
       <Box sx={{ padding: '20px' }}> {}
-        <h1>Bedtime Story Generator</h1>
+        <h1 className="your-alarm">Bedtime Story Generator</h1>
         {!storyGenerated ? (
           <Box sx={{ marginBottom: '20px' }}>
             <TextField
@@ -181,7 +181,9 @@ function Bedtime1() {
               variant="contained"
               onClick={generateStory}
               disabled={isLoading}
-              sx={{ marginTop: '20px' }}
+              sx={{ marginTop: '20px', backgroundColor: '#25C6FF',
+              '&:hover': { backgroundColor: '#25C6FF' },
+              '&:focus': { backgroundColor: '#25C6FF' } }}
             >
               Generate Story
             </Button>
@@ -191,7 +193,9 @@ function Bedtime1() {
             <Button
               variant="contained"
               onClick={resetStory}
-              sx={{ marginBottom: '10px', marginLeft: '5px' }}
+              sx={{ marginBottom: '10px', marginLeft: '5px', backgroundColor: '#25C6FF',
+              '&:hover': { backgroundColor: '#25C6FF' },
+              '&:focus': { backgroundColor: '#25C6FF' } }}
             >
               Generate New Story
             </Button>
@@ -200,7 +204,9 @@ function Bedtime1() {
                 variant="contained"
                 onClick={() => speak(story)}
                 disabled={isReading}
-                sx={{ padding: '8px 16px' }}
+                sx={{ padding: '8px 16px', backgroundColor: '#25C6FF',
+                '&:hover': { backgroundColor: '#25C6FF' },
+                '&:focus': { backgroundColor: '#25C6FF' } }}
               >
                 Read Story
               </Button>
@@ -208,7 +214,9 @@ function Bedtime1() {
                 variant="contained"
                 onClick={stopReading}
                 disabled={!isReading}
-                sx={{ padding: '8px 16px' }}
+                sx={{ padding: '8px 16px', backgroundColor: '#25C6FF',
+                '&:hover': { backgroundColor: '#25C6FF' },
+                '&:focus': { backgroundColor: '#25C6FF' } }}
               >
                 Stop Reading
               </Button>
@@ -216,7 +224,7 @@ function Bedtime1() {
           </Box>
         )}
         <Box sx={{ padding: '10px' }}>
-          <h2>Your Bedtime Story</h2>
+          <h2 className="your-alarm">Your Bedtime Story</h2>
           {isLoading ? (
             <p>Generating...</p>
           ) : (
