@@ -2,8 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Container, Paper, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import BottomIcons from '/Users/avneet/Desktop/ireonada2/sleep-app/src/components/overall/BottomIcons.js';
-import TopBar from '/Users/avneet/Desktop/ireonada2/sleep-app/src/components/overall/TopBar.js';
+
 
 function Character3_info() {
   const location = useLocation();
