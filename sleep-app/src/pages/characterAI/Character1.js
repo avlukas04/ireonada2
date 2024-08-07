@@ -97,7 +97,7 @@ function Character1() {
 
     return (
         <div>
-            <TopBar imageUrl={imageUrl}/>
+            <TopBar/>
             <Container maxWidth="sm" sx={{ mt: 4 }}> {/* Add margin-top here */}
                 <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
                     <Typography variant="h5" gutterBottom>Meet your AI companion!</Typography>

@@ -30,7 +30,7 @@ function Home() {
 
   return (
     <div >
-      <HomeTopBar />
+      <HomeTopBar/>
       <div className="blue-background">
         <p className="homepage-hello">Hello</p>
         <Box

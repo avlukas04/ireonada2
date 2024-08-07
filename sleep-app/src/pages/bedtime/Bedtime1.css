@@ -1,8 +1,4 @@
-.App {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
-  }
+
   
   input {
     margin: 10px;
@@ -17,5 +13,28 @@
   }
   
   h2 {
+    margin-top: 30px;
+  }
+
+  .story-image {
+    max-width: 100%;
+    }
+
+  .story-body {
+    text-align: center;
+    padding: 16px;
+  }
+
+  .story-context {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .story-generate {
+    display: flex;
+    justify-content: center;
     margin-top: 30px;
   }

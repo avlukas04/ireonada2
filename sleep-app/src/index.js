@@ -12,6 +12,8 @@ import Character2 from './pages/characterAI/Character2.js';
 import Character3_info from './pages/characterAI/Character3_info.js';
 import Character4_cl from './pages/characterAI/Character4_cl.js';
 import Character5_lb from './pages/characterAI/Character5_lb.js';
+import TopBar from './components/overall/TopBar.js';
+import HomeTopBar from './components/overall/HomeTopBar.js';
 
 import {
   createBrowserRouter,

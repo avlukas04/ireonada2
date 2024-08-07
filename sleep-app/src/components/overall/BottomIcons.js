@@ -21,12 +21,21 @@ function BottomIcons() {
         switch (path) {
             case '/calling':
                 return 1;
+            case '/calling1':
+                return 1;
             case '/':
                 return 0;
             case '/character':
                 return 2;
-            case '/bedtime':
-                return 3;
+            case '/character2':
+                return 2
+            case '/character3':
+                return 2
+            case '/character4':
+                return 2
+            case '/character5':
+                return 2
+           
             default:
                 return 0;
         }
@@ -36,6 +45,7 @@ function BottomIcons() {
 
     return (
         <div>
+    
             <ThemeProvider theme={theme}>
 
                 <Box sx={{ width: 500 }}>
@@ -50,7 +60,7 @@ function BottomIcons() {
                             <BottomNavigationAction href="/" label="Home" icon={<HomeIcon />} />
                             <BottomNavigationAction href="/calling" label="Alarm" icon={<AccessAlarmIcon />} />
                             <BottomNavigationAction href="/character" label="Characters" icon={<PersonIcon />} />
-                            <BottomNavigationAction href="/bedtime" label="Bedtime Story" icon={<AutoStoriesRoundedIcon />} />
+                            <BottomNavigationAction href="/bedtime" label="Storytime" icon={<AutoStoriesRoundedIcon />} />
                         </BottomNavigation>
                     </Paper>
                 </Box>

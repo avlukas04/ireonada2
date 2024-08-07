@@ -3,7 +3,11 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import TopBar from '../../components/overall/TopBar';
+import HomeTopBar from '../../components/overall/HomeTopBar';
 import BottomIcons from '../../components/overall/BottomIcons';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import './Bedtime1.css';
 
 function App() {
   const [genre, setGenre] = useState('');
@@ -63,7 +67,7 @@ function App() {
         return { [`[picture${index + 1}]`]: imageUrl };
       })
     ).then(results => Object.assign({}, ...results));
-  
+
     return updatedPlaceholderToImageUrl;
   };
 
@@ -103,7 +107,7 @@ function App() {
   const speak = (text) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, 'text/html');
-    
+
     let speechText = doc.body.textContent || '';
     const imgElements = doc.querySelectorAll('img');
     imgElements.forEach(img => {
@@ -137,44 +141,48 @@ function App() {
   return (
     <div className="App">
       <TopBar />
-      <h1>Bedtime Story Generator</h1>
+      <h1 className="your-alarm">Bedtime Story Generator</h1>
       {!storyGenerated ? (
         <>
-          <div>
-            <label>
-              Genre:
-              <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
-            </label>
+          <div className="story-context">
+            <div>
+              <label>
+                Genre:
+                <TextField type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Setting:
+                <TextField type="text" value={setting} onChange={(e) => setSetting(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Additional Details:
+                <TextField type="text" value={addDetails} onChange={(e) => setAddDetails(e.target.value)} />
+              </label>
+            </div>
+            <div>
+              <label>
+                Ending:
+                <TextField type="text" value={ending} onChange={(e) => setEnding(e.target.value)} />
+              </label>
+            </div>
           </div>
-          <div>
-            <label>
-              Setting:
-              <input type="text" value={setting} onChange={(e) => setSetting(e.target.value)} />
-            </label>
+          <div className="story-generate">
+            <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={generateStory}>Generate Story</Button>
           </div>
-          <div>
-            <label>
-              Additional Details:
-              <input type="text" value={addDetails} onChange={(e) => setAddDetails(e.target.value)} />
-            </label>
-          </div>
-          <div>
-            <label>
-              Ending:
-              <input type="text" value={ending} onChange={(e) => setEnding(e.target.value)} />
-            </label>
-          </div>
-          <button onClick={generateStory}>Generate Story</button>
         </>
       ) : (
         <>
-          <button onClick={resetStory}>Generate New Story</button>
-          <button onClick={() => speak(story)} disabled={isReading}>Read Story</button>
-          <button onClick={stopReading} disabled={!isReading}>Stop Reading</button>
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={resetStory}>Generate New Story</Button>
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={() => speak(story)} disabled={isReading}>Read Story</Button>
+          <Button variant="contained" sx={{ backgroundColor: '#25C6FF' }} onClick={stopReading} disabled={!isReading}>Stop Reading</Button>
         </>
       )}
-      <div>
-        <h2>Your Bedtime Story</h2>
+      <div className="story-body">
+        <h2 className="your-alarm">Your Bedtime Story</h2>
         {isLoading ? (
           <p>Generating...</p>
         ) : (

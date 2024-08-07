@@ -102,7 +102,7 @@ const AlarmHome = () => {
   if (alarmRinging) {
     return (
       <div className="alarm-container">
-        <h1>Alarm is ringing!</h1>
+        <h1 >Alarm is ringing!</h1>
         <Button variant="contained" sx={{ backgroundColor: '#25C6FF'}} onClick={handleAccept} className="alarm-button">Accept</Button>
       </div>
     );
@@ -110,8 +110,8 @@ const AlarmHome = () => {
 
   return (
     <div className="alarm-container">
-      <TopBar />
       <div>
+        <TopBar/>
         <h1 className="your-alarm">Your Alarms</h1>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
           <Button variant="contained" onClick={navigateToCalling1}
