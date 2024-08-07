@@ -6,15 +6,17 @@ import Button from '@mui/material/Button';
 import MicIcon from '@mui/icons-material/Mic';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Calling1() {
   const [inputText, setInputText] = useState('');
   const [conversation, setConversation] = useState([]);
-  const [conversationStarted, setConversationStarted] = useState(false);  
+  const [conversationStarted, setConversationStarted] = useState(false);
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance;
-  const recognition = new SpeechRecognition();
+  const recognition = useRef(new SpeechRecognition()).current;
   const hasFetched = useRef(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (!hasFetched.current) {
@@ -28,12 +30,17 @@ function Calling1() {
     };
   }, []);
 
-  // Event handler for our input box
+  useEffect(() => {
+    if (location.pathname !== '/Calling1') {
+      window.speechSynthesis.cancel();
+      recognition.stop();
+    }
+  }, [location.pathname]);
+
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
-  // The reagent API call
   const fetchResponse = async (conversation) => {
     console.log('Conversation before sending to API:', conversation);
     try {
@@ -57,7 +64,6 @@ function Calling1() {
     }
   };
 
-  // Gets user input
   const handleSend = async (text) => {
     if (text.trim()) {
       const newConversation = [...conversation, `User: ${text}`];
@@ -71,7 +77,7 @@ function Calling1() {
   };
 
   const handleStartConversation = async () => {
-    setConversation([]);  
+    setConversation([]);
     setInputText('');
     setConversationStarted(true);
 
@@ -101,6 +107,9 @@ function Calling1() {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = 1.35;
     utterance.pitch = 1.4;
+    utterance.onend = () => {
+      startListening();
+    };
     window.speechSynthesis.speak(utterance);
   };
 
@@ -134,16 +143,16 @@ function Calling1() {
           <Button variant="text" onClick={startListening}><MicIcon sx={{ color: '#25C6FF' }}/></Button>
         </div>
       )}
-       <div>
-       <Box sx={{ maxWidth: '86%', margin: '0 auto' }}>
-        <h2 className="your-alarm">Conversation History</h2>
-        <div>
-          {conversation.map((message, index) => (
-            <div key={index}>
-              {message}
-            </div>
-          ))}
-        </div>
+      <div>
+        <Box sx={{ maxWidth: '86%', margin: '0 auto' }}>
+          <h2 className="your-alarm">Conversation History</h2>
+          <div>
+            {conversation.map((message, index) => (
+              <div key={index}>
+                {message}
+              </div>
+            ))}
+          </div>
         </Box>
       </div>
       <BottomIcons/>
