@@ -142,7 +142,7 @@ function Bedtime1() {
   return (
     <div className="App">
       <TopBar />
-      <Box sx={{ paddingBottom: '40px' }}> {}
+      <Box sx={{ padding: '20px' }}> {}
         <h1>Bedtime Story Generator</h1>
         {!storyGenerated ? (
           <Box sx={{ marginBottom: '20px' }}>
