@@ -5,14 +5,14 @@ import TopBar from './components/overall/TopBar';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import { red } from '@mui/material/colors';
-import AlarmBackground from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/images/alarm-background.png';
-import BedtimeBackground from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/images/bedtime-background.png'
-import '/Users/liwensun/Desktop/ireonada2/sleep-app/src/Home.css'
-import Curve from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/images/curve.png'
+import AlarmBackground from './images/alarm-background.png';
+import BedtimeBackground from './images/bedtime-background.png';
+import './Home.css'
+import Curve from './images/curve.png'
 import Box from '@mui/material/Box';
-import Animal1 from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/images/animal1.png';
-import Animal2 from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/images/animal2.png';
-import Animal3 from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/images/animal3.png';
+import Animal1 from './images/animal1.png';
+import Animal2 from './images/animal2.png';
+import Animal3 from './images/animal3.png';
 
 function Home() {
 

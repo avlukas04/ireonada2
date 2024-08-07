@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography, Container, Stack, Paper } from '@mui/material';
-import BottomIcons from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/components/overall/BottomIcons.js';
-import TopBar from '/Users/liwensun/Desktop/ireonada2/sleep-app/src/components/overall/TopBar.js';
+import BottomIcons from '../../components/overall/BottomIcons.js';
+import TopBar from '../../components/overall/TopBar.js';
 
 function Character1() {
   const [aiName, setAiName] = useState('');
