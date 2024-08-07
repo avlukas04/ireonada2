@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import BottomIcons from '../../components/overall/BottomIcons';
 import TopBar from '../../components/overall/TopBar';
@@ -7,33 +7,36 @@ import MicIcon from '@mui/icons-material/Mic';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
-
-
 function Calling1() {
-  //sets the blank input text and conversation
   const [inputText, setInputText] = useState('');
   const [conversation, setConversation] = useState([]);
-  const [conversationStarted, setConversationStarted] = useState(false);
-  const [date, setDate] = useState('');
-  
-  //speech stuff
+  const [conversationStarted, setConversationStarted] = useState(false);  
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance;
   const recognition = new SpeechRecognition();
+  const hasFetched = useRef(false);
 
   useEffect(() => {
-    const currentDate = moment().format('YYYY-MM-DD');
-    setDate(currentDate);
+    if (!hasFetched.current) {
+      handleStartConversation();
+      hasFetched.current = true;
+    }
+
+    return () => {
+      window.speechSynthesis.cancel();
+      recognition.stop();
+    };
   }, []);
 
-  //event handler for our input box
+  // Event handler for our input box
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
-  //the reagent api hehe
+  // The reagent API call
   const fetchResponse = async (conversation) => {
     console.log('Conversation before sending to API:', conversation);
+    try {
       const response = await fetch('https://noggin.rea.gent/eastern-hummingbird-1320', {
         method: 'POST',
         headers: {
@@ -42,15 +45,19 @@ function Calling1() {
         },
         body: JSON.stringify({
           "conversation_history": conversation.join('\n'),
-          "date": date
+          "date": moment().format('YYYY-MM-DD')
         }),
       });
-  
+
       const responseData = await response.text();
       return `Character Name: ${responseData}`;
+    } catch (error) {
+      console.error('Error fetching response:', error);
+      return 'An error occurred while fetching the response.';
+    }
   };
 
-  //gets user input
+  // Gets user input
   const handleSend = async (text) => {
     if (text.trim()) {
       const newConversation = [...conversation, `User: ${text}`];
@@ -73,6 +80,14 @@ function Calling1() {
     speak(apiResponse);
   };
 
+  const handleStopConversation = () => {
+    setConversationStarted(false);
+    setConversation([]);
+    setInputText('');
+    window.speechSynthesis.cancel();
+    recognition.stop();
+  };
+
   const startListening = () => {
     recognition.start();
   };
@@ -93,8 +108,9 @@ function Calling1() {
     <div>
       <TopBar/>
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: "40px"}}>
-        {!conversationStarted && (
-
+        {conversationStarted ? (
+          <Button variant="contained" sx={{ backgroundColor: '#FF3B3B' }} onClick={handleStopConversation} className="stop-convo">Stop Conversation</Button>
+        ) : (
           <Button variant="contained" sx={{ backgroundColor: '#25C6FF'}} onClick={handleStartConversation} className="start-convo">Start Conversation</Button>
         )}
       </div>
