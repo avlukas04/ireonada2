@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, TextField, Typography, Container, Stack, Paper } from '@mui/material';
-import BottomIcons from '../../components/overall/BottomIcons.js';
-import TopBar from '../../components/overall/TopBar.js';
+import TopBar from '../../components/overall/TopBar';
+import BottomIcons from '../../components/overall/BottomIcons';
 
 function Character1() {
   const [aiName, setAiName] = useState('');
@@ -96,6 +96,8 @@ function Character1() {
   }, [imageUrl]);
 
   return (
+    <div>
+      <TopBar/>
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>Meet your AI companion!</Typography>
@@ -135,6 +137,8 @@ function Character1() {
         </Box>
       </Paper>
     </Container>
+    <BottomIcons/>
+    </div>
   );
 }
 

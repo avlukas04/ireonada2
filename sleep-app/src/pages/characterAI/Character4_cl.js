@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Container, Paper, Grid } from '@mui/material';
+import TopBar from '../../components/overall/TopBar';
+import BottomIcons from '../../components/overall/BottomIcons';
 
 function Character4_cl() {
   const location = useLocation();
@@ -59,6 +61,8 @@ function Character4_cl() {
   };
 
   return (
+    <div>
+      <TopBar/>
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>Closet</Typography>
@@ -114,6 +118,8 @@ function Character4_cl() {
         <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
       </Paper>
     </Container>
+    <BottomIcons/>
+    </div>
   );
 }
 

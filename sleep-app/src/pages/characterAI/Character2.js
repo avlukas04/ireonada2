@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, Typography, Container, Paper, Stack } from '@mui/material';
+import TopBar from '../../components/overall/TopBar';
+import BottomIcons from '../../components/overall/BottomIcons';
 
 
 function Character2() {
@@ -9,6 +11,8 @@ function Character2() {
   const navigate = useNavigate();
 
   return (
+    <div>
+      <TopBar/>
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>Hi, User!</Typography>
@@ -54,6 +58,8 @@ function Character2() {
         </Stack>
       </Paper>
     </Container>
+    <BottomIcons/>
+    </div>
   );
 }
 

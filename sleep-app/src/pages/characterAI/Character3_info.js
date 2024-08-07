@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Container, Paper, IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import TopBar from '../../components/overall/TopBar';
+import BottomIcons from '../../components/overall/BottomIcons';
 
 
 function Character3_info() {
@@ -21,6 +23,8 @@ function Character3_info() {
   );
 
   return (
+    <div>
+      <TopBar/>
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>Your AI Companion</Typography>
@@ -123,6 +127,8 @@ function Character3_info() {
         </Box>
       </Paper>
     </Container>
+    <BottomIcons/>
+    </div>
   );
 }
 

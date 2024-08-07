@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, Container, Paper, Table, TableHead, TableBody, TableRow, TableCell, TableContainer, Paper as MuiPaper } from '@mui/material';
+import TopBar from '../../components/overall/TopBar';
+import BottomIcons from '../../components/overall/BottomIcons';
 
 
 function Character5_lb() {
@@ -16,6 +18,8 @@ function Character5_lb() {
   ];
 
   return (
+    <div>
+      <TopBar/>
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ padding: 3, textAlign: 'center' }}>
         <Typography variant="h5" gutterBottom>Leaderboard</Typography>
@@ -71,6 +75,8 @@ function Character5_lb() {
         </Box>
       </Paper>
     </Container>
+    <BottomIcons/>
+    </div>
   );
 }
 

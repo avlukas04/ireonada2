@@ -13,8 +13,19 @@ import Box from '@mui/material/Box';
 import Animal1 from './images/animal1.png';
 import Animal2 from './images/animal2.png';
 import Animal3 from './images/animal3.png';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home() {
+  const navigate = useNavigate();
+
+  const handleAlarmClick = () => {
+    navigate('/calling');
+  };
+
+  const handleBedtimeClick = () => {
+    navigate('/bedtime');
+  };
 
   return (
     <div >
@@ -34,18 +45,21 @@ function Home() {
         />
       </div>
       <div className="center-card">
+        <Box onClick={handleAlarmClick}>
+          <Card sx={{
+            width: 384, height: 216, backgroundImage: `url(${AlarmBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',
+            borderTopLeftRadius: '40px',
+            borderBottomRightRadius: '40px'
+          }} />
+        </Box>
 
-        <Card sx={{
-          width: 384, height: 216, backgroundImage: `url(${AlarmBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',
-          borderTopLeftRadius: '40px',
-          borderBottomRightRadius: '40px'
-        }} />
-
-        <Card sx={{
-          width: 384, height: 216, backgroundImage: `url(${BedtimeBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',
-          borderTopLeftRadius: '40px',
-          borderBottomRightRadius: '40px'
-        }} />
+        <Box onClick={handleBedtimeClick}>
+          <Card sx={{
+            width: 384, height: 216, backgroundImage: `url(${BedtimeBackground})`, backgroundSize: 'cover', backgroundPosition: 'center',
+            borderTopLeftRadius: '40px',
+            borderBottomRightRadius: '40px'
+          }} />
+        </Box>
       </div>
       <p className="homepage-caption">Explore cute characters</p>
       <div className="example-characters">
@@ -79,7 +93,7 @@ function Home() {
           alt="Example Image"
         />
       </div>
-    
+
       <BottomIcons />
     </div>
   )
