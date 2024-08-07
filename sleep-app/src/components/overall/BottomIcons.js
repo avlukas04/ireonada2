@@ -35,6 +35,8 @@ function BottomIcons() {
                 return 2
             case '/character5':
                 return 2
+            case '/bedtime':
+                return 3;
            
             default:
                 return 0;
