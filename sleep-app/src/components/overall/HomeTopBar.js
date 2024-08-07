@@ -14,27 +14,28 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Animal2 from '../../images/animal2.png';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import { useNavigate } from 'react-router-dom';
-
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function TopBar() {
+function HomeTopBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-    const navigate = useNavigate(); 
-
-    const handleBackClick = () => {
-        navigate(-1); 
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
     };
 
-    return (
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
-        <div>
-            <AppBar position="static" sx={{ backgroundColor: '#25C6FF' }}>
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+  return (
+    <div>
+        <AppBar position="static" sx={{ backgroundColor: '#25C6FF' }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -63,9 +64,8 @@ function TopBar() {
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 color="inherit"
-                                onClick={handleBackClick}
                             >
-                                <ArrowBackIosIcon/>
+                                <NotificationsIcon/>
                             </IconButton>
                            
                         </Box>
@@ -96,9 +96,9 @@ function TopBar() {
                     </Toolbar>
                 </Container>
             </AppBar>
-
-        </div>
-    )
+      
+    </div>
+  )
 }
 
-export default TopBar
+export default HomeTopBar

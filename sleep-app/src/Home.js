@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import BottomIcons from './components/overall/BottomIcons';
 import TopBar from './components/overall/TopBar';
+import HomeTopBar from './components/overall/HomeTopBar';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import { red } from '@mui/material/colors';
@@ -29,7 +30,7 @@ function Home() {
 
   return (
     <div >
-      <TopBar />
+      <HomeTopBar />
       <div className="blue-background">
         <p className="homepage-hello">Hello</p>
         <Box
