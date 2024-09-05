@@ -11,7 +11,7 @@ This app is implemented using React and Material UI. It has three main features.
 
 ### Character Generation
 
-Users can type in description and generate a character to be their profile picture. They can decorate their character by putting on accessories for them. 
+Integrated with IXL learning to generate images, users can type in description and generate a character to be their profile picture. They can decorate their character by putting on accessories for them. 
 <p align="center">
     <img src="./src/readme-images/sleep-app11.png" alt="Character Generation Example" width="200">    
     <img src="./src/readme-images/sleep-app3.png" alt="Character Generation Example" width="200">
@@ -21,7 +21,7 @@ Users can type in description and generate a character to be their profile pictu
 
 ### Bedtime Story
 
-Users can give description of what type of story they want to hear and read the generated story with images or have the app read their bedtime story for them to relax before falling asleep. 
+Integrated with ChatGPT, users can give description of what type of story they want to hear and read the generated story with images or have the app read their bedtime story for them to relax before falling asleep. 
 <p align="center">
     <img src="./src/readme-images/sleep-app6.png" alt="Character Generation Example" width="200">
     <img src="./src/readme-images/sleep-app7.png" alt="Character Generation Example" width="198">
@@ -29,7 +29,7 @@ Users can give description of what type of story they want to hear and read the 
 
 ### AI Calling
 
-Users can set an alarm on when they want to wake up and an AI character will call them at the specified time and talk with them while they try to wake up. 
+Implemented through the integration of voice synthesis APIs, users can set an alarm on when they want to wake up and an AI character will call them at the specified time and talk with them while they try to wake up. 
 <p align="center">
     <img src="./src/readme-images/sleep-app8.png" alt="Character Generation Example" width="201">
     <img src="./src/readme-images/sleep-app9.png" alt="Character Generation Example" width="198">
